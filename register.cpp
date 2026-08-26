@@ -1,0 +1,26 @@
+// Demonstrates the historical use of the register storage-class specifier.
+#include <iostream>
+using namespace std;
+class Register
+{
+    private:
+        unsigned char value;
+    public:
+        void write(unsigned char v) { value = v; }
+        unsigned char read() { return value; }
+        void reset() { value = 0; }
+};
+int main()
+{
+    Register file[4];
+    for (register int i = 0; i < 4; i++)
+    {
+        file[i].reset();
+    }
+    file[3].write(0x10);
+    for(int i=0; i < 4; i++)
+    {
+        cout << "file[" << i << "] = " << (int)file[i].read() << endl;
+    }
+    return 0;
+}
